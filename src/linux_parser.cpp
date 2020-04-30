@@ -77,8 +77,8 @@ float LinuxParser::MemoryUtilization() {
   std::string unit;
   float memtotal;
   float memfree;
-  float memavail;
-  float buff;
+  //float memavail;
+  //float buff;
 std::ifstream fs(kProcDirectory+kMeminfoFilename);  
   if(fs.is_open()){
     while (std::getline(fs, line)){
@@ -91,12 +91,12 @@ std::ifstream fs(kProcDirectory+kMeminfoFilename);
         else if(key =="MemFree"){
         memfree=stof(value);
         }
-        else if(key =="MemAvailable"){
+        /*else if(key =="MemAvailable"){
         memavail=stof(value);
         }
         else if(key =="Buffers"){
           buff=stof(value);
-        }
+        }*/
       }
     }
     
@@ -237,6 +237,7 @@ int LinuxParser::RunningProcesses() {
       }
     }
   }
+  return -1;
   }
 
 // TODO: Read and return the command associated with a process
@@ -256,7 +257,7 @@ string LinuxParser::Ram(int pid) {
    string line;
   string value;
   string key;
-  int v;
+  //int v;
   
   std::string PID=to_string(pid);
   std::ifstream file(kProcDirectory+PID+kStatusFilename);
@@ -271,7 +272,7 @@ string LinuxParser::Ram(int pid) {
       }
     }
   }
- 
+ return value;
    }
 
 // TODO: Read and return the user ID associated with a process
